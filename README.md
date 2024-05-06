@@ -1,1 +1,1 @@
-wget -fq "https://github.com/GlitterVappy/ME-system-fluid-manager/blob/main/fluids.lua" "fluids.lua"
+wget -fq "https://raw.githubusercontent.com/GlitterVappy/ME-system-fluid-manager/fluids.lua" "fluids.lua"
