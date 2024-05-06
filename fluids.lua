@@ -1,15 +1,17 @@
 local c = require("component")
 local fs = require("filesystem")
+local tabl = require("table")
 local mecon = c.proxy(c.me_controller.address)
 local event = require("event")
-local tabs = [[]]
 local currfluid = ""
 local pyro = "Blazing Pyrotheum"
+local data = []
+local mainTable = {}
 
 local function LoadFluids()
   local file,err = io.open("fluids.cfg", "r")
   if err == nil then
-    local data = file:read("*a")
+    data = file:read("*a")
     file:close()
   end
 end
@@ -36,12 +38,20 @@ end
 local function setFluid(str)
   currfluid = str
 end
-
+-- clearly nonfunctional
+local function mMenu(table)
+  print("lorem ipsum dolor sit amet")
+  for x in #table
+  do nothing
+  end
+end
+local function setup()
+  LoadFluids()
+end
 
 local function main(arg1,arg2)
   local index = getIndex()
   SaveFluids()
 end
-
 main()
 --eof
