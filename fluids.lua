@@ -43,6 +43,7 @@ local function mMenu(table)
   print("lorem ipsum dolor sit amet")
   for x in #table
   do nothing
+    
   end
 end
 local function setup()
@@ -51,7 +52,8 @@ end
 
 local function main(arg1,arg2)
   local index = getIndex()
-  SaveFluids()
+  local xop = {}
+  table.insert(xop[0,1],meow)
 end
 main()
 --eof
