@@ -22,6 +22,8 @@ local function SaveFluids(list)
   file:close()
   LoadFluids()
 end
+--Todo: save data as a table
+-- example: table["fluidName"] = quantityWanted, amountToCraft
 
 local function getIndex(string)
   local table = mecon.getFluidsInNetwork()
@@ -55,5 +57,6 @@ local function main(arg1,arg2)
   local xop = {}
   table.insert(xop[0,1],meow)
 end
+
 main()
 --eof
