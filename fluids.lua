@@ -8,6 +8,10 @@ local pyro = "Blazing Pyrotheum"
 local data = []
 local mainTable = {}
 
+local function fluidTableAppend(name, quantityWanted, amountToCraft)
+  mainTable[name] = quantityWanted, amountToCraft
+end
+
 local function LoadFluids()
   local file,err = io.open("fluids.cfg", "r")
   if err == nil then
@@ -15,9 +19,9 @@ local function LoadFluids()
     file:close()
   end
 end
-local function SaveFluids(list)
+local function SaveFluids(table)
   local file,err = io.open("fluids.cfg", "w")
-  local itemsToSave = {"Blazing Pyrotheum", "Aerotheum ig"}
+  local itemsToSave = list
   file:write(itemsToSave[1])
   file:close()
   LoadFluids()
@@ -54,8 +58,9 @@ end
 
 local function main(arg1,arg2)
   local index = getIndex()
-  local xop = {}
-  table.insert(xop[0,1],meow)
+  fluidTableAppend("Liquid Pyrotheum", 1000, 100)
+  fluidTableAppend("Cum",9999,20)
+  print(mainTable)
 end
 
 main()
