@@ -44,14 +44,7 @@ end
 local function setFluid(str)
   currfluid = str
 end
--- clearly nonfunctional
-local function mMenu(table)
-  print("lorem ipsum dolor sit amet")
-  for x in #table
-  do nothing
-    
-  end
-end
+
 local function setup()
   LoadFluids()
 end
