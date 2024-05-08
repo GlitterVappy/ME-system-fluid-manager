@@ -5,7 +5,7 @@ local mecon = c.proxy(c.me_controller.address)
 local event = require("event")
 local currfluid = {}
 local pyro = "Blazing Pyrotheum"
-  local data = {}
+local data = {}
 local mainTable = {}
 
 local function fluidAdd(name, quantityWanted, amountToCraft)
@@ -23,18 +23,18 @@ end
 local function SaveFluids()
   local file,err = io.open("fluids.cfg", "w")
   local itemToSave = ""
-  for k,v in mainTable do
-    for x,y in v do
-      if x == 0 then
+  for k,v in pairs(mainTable) do
+    for x,y in pairs(v) do
+      if x == 1 then
         itemToSave = "{" .. y .. ","
-      elseif x == 2 then
+      elseif x == 3 then
         itemToSave = itemToSave .. y .. "}"
       else 
         itemToSave = itemToSave .. y .. ","
       end
     end
     file:write(itemToSave)
-      
+  end
   file:close()
   LoadFluids()
 end
@@ -68,8 +68,8 @@ local function setup()
   local var = {}
   LoadFluids()
   for k,v in data do
-    
-  
+     var = var
+  end
 end
 
 local function main(arg1,arg2)
