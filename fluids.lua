@@ -9,7 +9,7 @@ local pyro = "Blazing Pyrotheum"
 local mainTable = {}
 
 local function fluidTableAppend(name, quantityWanted, amountToCraft)
-  mainTable[name] = quantityWanted, amountToCraft
+  tabl.insert(mainTable, {name, quantityWanted, amountToCraft})
 end
 
 local function LoadFluids()
@@ -27,7 +27,7 @@ local function SaveFluids(table)
   LoadFluids()
 end
 --Todo: save data as a table
--- example: table["fluidName"] = quantityWanted, amountToCraft
+-- example: table[index] = {fluidName, quantityWanted, amountToCraft} 
 
 local function getIndex(string)
   local table = mecon.getFluidsInNetwork()
@@ -44,7 +44,13 @@ end
 local function setFluid(str)
   currfluid = str
 end
-
+local function printTable()
+  for k,v in pairs(mainTable) do
+    for x,y in pairs(v) do
+      print(y)
+    end
+  end
+end
 local function setup()
   LoadFluids()
 end
@@ -53,9 +59,7 @@ local function main(arg1,arg2)
   local index = getIndex()
   fluidTableAppend("Liquid Pyrotheum", 1000, 100)
   fluidTableAppend("Cum",9999,20)
-  for x in mainTable do
-    print(x)
-  end
+  printTable()
 end
 
 main()
