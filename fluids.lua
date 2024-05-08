@@ -53,7 +53,9 @@ local function main(arg1,arg2)
   local index = getIndex()
   fluidTableAppend("Liquid Pyrotheum", 1000, 100)
   fluidTableAppend("Cum",9999,20)
-  print(mainTable)
+  for x in mainTable do
+    print(x)
+  end
 end
 
 main()
