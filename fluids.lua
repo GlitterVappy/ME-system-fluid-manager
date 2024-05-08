@@ -3,12 +3,12 @@ local fs = require("filesystem")
 local tabl = require("table")
 local mecon = c.proxy(c.me_controller.address)
 local event = require("event")
-local currfluid = ""
+local currfluid = {}
 local pyro = "Blazing Pyrotheum"
---local data = []
+local data = []
 local mainTable = {}
 
-local function fluidTableAppend(name, quantityWanted, amountToCraft)
+local function fluidAdd(name, quantityWanted, amountToCraft)
   tabl.insert(mainTable, {name, quantityWanted, amountToCraft})
 end
 
@@ -19,10 +19,22 @@ local function LoadFluids()
     file:close()
   end
 end
-local function SaveFluids(table)
+
+local function SaveFluids()
   local file,err = io.open("fluids.cfg", "w")
-  local itemsToSave = list
-  file:write(itemsToSave[1])
+  local itemToSave = ""
+  for k,v in mainTable do
+    for x,y in v do
+      if x == 0 then
+        itemToSave = "{" .. y .. ","
+      elseif x == 2 then
+        itemToSave = itemToSave .. y .. "}"
+      else 
+        itemToSave = itemToSave .. y .. ","
+      end
+    end
+    file:write(itemToSave)
+      
   file:close()
   LoadFluids()
 end
@@ -41,9 +53,10 @@ local function getIndex(string)
   end
 end
 
-local function setFluid(str)
-  currfluid = str
+local function setFluid(num)
+  currfluid = mainTable[0]
 end
+
 local function printTable()
   for k,v in pairs(mainTable) do
     for x,y in pairs(v) do
@@ -52,14 +65,19 @@ local function printTable()
   end
 end
 local function setup()
+  local var = {}
   LoadFluids()
+  for k,v in data do
+    
+  
 end
 
 local function main(arg1,arg2)
-  local index = getIndex()
-  fluidTableAppend("Liquid Pyrotheum", 1000, 100)
-  fluidTableAppend("Cum",9999,20)
+  fluidAdd("Liquid Pyrotheum", 1000, 100)
+  fluidAdd("Cum",9999,20)
   printTable()
+  SaveFluids()
+  print("saved fluids!")
 end
 
 main()
