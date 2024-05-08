@@ -8,15 +8,35 @@ local pyro = "Blazing Pyrotheum"
 local data = {}
 local mainTable = {}
 
+
+
+function split( inSplitPattern )
+    local outResults = {}
+    local theStart = 1
+    local theSplitStart, theSplitEnd = string.find( self, inSplitPattern, theStart )
+ 
+    while theSplitStart do
+        table.insert( outResults, string.sub( self, theStart, theSplitStart-1 ) )
+        theStart = theSplitEnd + 1
+        theSplitStart, theSplitEnd = string.find( self, inSplitPattern, theStart )
+    end
+ 
+    table.insert( outResults, string.sub( self, theStart ) )
+    return outResults
+end -- credit to solar2d string magic
+
+
+
 local function fluidAdd(name, quantityWanted, amountToCraft)
   tabl.insert(mainTable, {name, quantityWanted, amountToCraft})
 end
 
 local function LoadFluids()
   local file,err = io.open("fluids.cfg", "r")
-  if err == nil then
-    data = file:read("*a")
-    file:close()
+  local fluidToLoad = {}
+    for x in file do
+      fluidToLoad = split(x, ", ")
+      tabl.insert(mainTable, fluidToLoad)
   end
 end
 
@@ -28,7 +48,7 @@ local function SaveFluids()
       if x == 1 then
         itemToSave = "{" .. y .. ","
       elseif x == 3 then
-        itemToSave = itemToSave .. y .. "}"
+        itemToSave = itemToSave .. y .. "} \n"
       else 
         itemToSave = itemToSave .. y .. ","
       end
@@ -73,8 +93,7 @@ local function setup()
 end
 
 local function main(arg1,arg2)
-  fluidAdd("Liquid Pyrotheum", 1000, 100)
-  fluidAdd("Cum",9999,20)
+  LoadFluids()
   printTable()
   SaveFluids()
   print("saved fluids!")
