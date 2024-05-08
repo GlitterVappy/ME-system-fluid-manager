@@ -5,7 +5,7 @@ local mecon = c.proxy(c.me_controller.address)
 local event = require("event")
 local currfluid = {}
 local pyro = "Blazing Pyrotheum"
-local data = []
+  local data = {}
 local mainTable = {}
 
 local function fluidAdd(name, quantityWanted, amountToCraft)
