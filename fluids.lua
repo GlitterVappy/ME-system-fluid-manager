@@ -9,24 +9,6 @@ local data = {}
 local mainTable = {}
 
 
-
-function split( inSplitPattern )
-    local outResults = {}
-    local theStart = 1
-    local theSplitStart, theSplitEnd = string.find( self, inSplitPattern, theStart )
- 
-    while theSplitStart do
-        table.insert( outResults, string.sub( self, theStart, theSplitStart-1 ) )
-        theStart = theSplitEnd + 1
-        theSplitStart, theSplitEnd = string.find( self, inSplitPattern, theStart )
-    end
- 
-    table.insert( outResults, string.sub( self, theStart ) )
-    return outResults
-end -- credit to solar2d string magic
-
-
-
 local function fluidAdd(name, quantityWanted, amountToCraft)
   tabl.insert(mainTable, {name, quantityWanted, amountToCraft})
 end
@@ -34,9 +16,14 @@ end
 local function LoadFluids()
   local file,err = io.open("fluids.cfg", "r")
   local fluidToLoad = {}
-    for x in file do
-      fluidToLoad = split(x, ", ")
-      tabl.insert(mainTable, fluidToLoad)
+  for x in file:lines() do 
+    if x == "{" then
+      local fluidToLoad = {}
+    elseif x == "}" then
+      tabl.insert(mainTable,fluidToLoad)
+    else
+      tabl.insert(fluidToLoad,x)
+    end
   end
 end
 
@@ -46,11 +33,11 @@ local function SaveFluids()
   for k,v in pairs(mainTable) do
     for x,y in pairs(v) do
       if x == 1 then
-        itemToSave = "{" .. y .. ","
+        itemToSave = "{\n".. y .. "\n"
       elseif x == 3 then
-        itemToSave = itemToSave .. y .. "} \n"
+        itemToSave = itemToSave .. y .. "\n}\n"
       else 
-        itemToSave = itemToSave .. y .. ","
+        itemToSave = itemToSave .. y .. "\n"
       end
     end
     file:write(itemToSave)
@@ -94,6 +81,7 @@ end
 
 local function main(arg1,arg2)
   LoadFluids()
+  fluidAdd("test", 1000 , 100)
   printTable()
   SaveFluids()
   print("saved fluids!")
