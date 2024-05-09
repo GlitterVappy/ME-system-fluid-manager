@@ -72,19 +72,12 @@ local function printTable()
   end
 end
 local function setup()
-  local var = {}
   LoadFluids()
-  for k,v in data do
-     var = var
   end
 end
 
 local function main(arg1,arg2)
-  LoadFluids()
-  fluidAdd("test", 1000 , 100)
-  printTable()
-  SaveFluids()
-  print("saved fluids!")
+  setup()
 end
 
 main()
